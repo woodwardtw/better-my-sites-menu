@@ -9,16 +9,15 @@ Author URI: http://bionicteaching.com/
 */
 
 function remove_non_admin_blogs($blogs) {
- 				global $current_user; 
-    			$user_id = $current_user->ID; 
-    			$role = 'bbp_participant';
+                global $current_user; 
+                $user_id = $current_user->ID; 
+                $role = 'bbp_participant';
 
                 foreach ( $blogs as $blog_id => $blog ) {
 
                     // Get the user object for the user for this blog.
                     $user = new WP_User( $user_id, '', $blog_id );
-				if (count( $user->roles ) === 1 ){
-
+                if (count( $user->roles ) < 2 ){
 
                     // Remove this blog from the list if the user doesn't have the role for it.
                     if (in_array( $role, $user->roles ) ) {
